@@ -1,12 +1,12 @@
-const express = require('express');
-const app = express();
-const PORT = 3000;
-const HOST = '172.31.25.79'; // Replace with your actual IP
-
-app.get('/', (req, res) => {
-  res.send('Hello, Jenkins! Your app is running.');
-});
-
-app.listen(PORT, HOST, () => {
-  console.log(`Server running at http://${HOST}:${PORT}/`);
-});
+{
+  "name": "node-app",
+  "version": "0.0.1",
+  "description": "Hello Jenkins test app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
