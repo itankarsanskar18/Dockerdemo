@@ -1,14 +1,12 @@
-ubuntu@ip-172-31-25-79:~/nodeapp$ cat package.json
-{
-  "name": "node-app",
-  "description": "hello jenkins test app",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "express": "3.12.0"
-  },
-  "devDependencies": {
-    "mocha": "10.2.0",
-    "supertest": "6.3.3"
-  }
-}
+const express = require('express');
+const app = express();
+const PORT = 3000;
+const HOST = '172.31.25.79'; // Replace with your actual IP
+
+app.get('/', (req, res) => {
+  res.send('Hello, Jenkins! Your app is running.');
+});
+
+app.listen(PORT, HOST, () => {
+  console.log(`Server running at http://${HOST}:${PORT}/`);
+});
