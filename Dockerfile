@@ -1,21 +1,20 @@
 # Pull the official Node.js runtime image
-docker pull node:21
+FROM node:21
 
-# Create a container and set the working directory
-docker run -it --name my_node_app -w /usr/src/app node:21 powershell
+# Set the working directory inside the container
+WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json from the local directory to the container
-docker cp .\package.json my_node_app:/usr/src/app/
-docker cp .\package-lock.json my_node_app:/usr/src/app/
+# Copy package.json and package-lock.json to the container
+COPY package.json package-lock.json ./
 
-# Install the application dependencies inside the container
-docker exec -it my_node_app npm install
+# Install the application dependencies
+RUN npm install
 
-# Copy the application code to the working directory in the container
-docker cp . my_node_app:/usr/src/app/
+# Copy the rest of the application code to the working directory
+COPY . .
 
-# Expose the port (3000 in this case)
-# Note: Ports are specified when running the container, e.g., -p 3000:3000
+# Expose the application port (3000 in this case)
+EXPOSE 3000
 
-# Start the application (index.js)
-docker exec -it my_node_app node index.js
+# Start the application (assuming index.js is the entry point)
+CMD ["node", "index.js"]
